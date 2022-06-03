@@ -7,7 +7,7 @@ type Props = {
 const Hello = ({children}: Props) => {
     return (
         <>
-            <h1>Me cargaron dinamicamente</p>
+            <h1>Me cargaron dinamicamente</h1>
             <p>{children}</p>
         </>
     )
