@@ -5,8 +5,18 @@ import {sampleUserData} from '../../utils/sample-data'
 import Layout from '../../components/Layout'
 import ListDetail from '../../components/ListDetail'
 import {useRouter} from "next/router";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {ENVIRONMENT} from "../../environment/config";
+import {useTheme} from "@mui/system";
+import {
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    useMediaQuery
+} from "@mui/material";
 
 type Props = {
     item?: User
@@ -19,6 +29,9 @@ type StaticPropsDetailQueryParams = {
 const StaticPropsDetail = ({item, errors}: Props) => {
     const router = useRouter()
     const queryParams = router.query as StaticPropsDetailQueryParams;
+    const theme = useTheme();
+    const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
+
     useEffect(() => {
         fetch(ENVIRONMENT.host + '/posts/1')
             .then((res) => res.json())
@@ -27,6 +40,15 @@ const StaticPropsDetail = ({item, errors}: Props) => {
                 console.log('queryParams',queryParams)
             })
     }, [])
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     if (errors) {
         return (
@@ -45,6 +67,39 @@ const StaticPropsDetail = ({item, errors}: Props) => {
             } | Next.js + TypeScript Example`}
         >
             {item && <ListDetail item={item}/>}
+            <p>
+                Hola
+            </p>
+
+            <div>
+                <Button variant="outlined" onClick={handleClickOpen}>
+                    Open responsive dialog
+                </Button>
+                <Dialog
+                    fullScreen={fullScreen}
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="responsive-dialog-title"
+                >
+                    <DialogTitle id="responsive-dialog-title">
+                        {"Use Google's location service?"}
+                    </DialogTitle>
+                    <DialogContent>
+                        <DialogContentText>
+                            Let Google help apps determine location. This means sending anonymous
+                            location data to Google, even when no apps are running.
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button autoFocus onClick={handleClose}>
+                            Disagree
+                        </Button>
+                        <Button onClick={handleClose} autoFocus>
+                            Agree
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+            </div>
         </Layout>
     )
 }
