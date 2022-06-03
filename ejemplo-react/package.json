@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "next": "latest",
+    "postcss-scss": "^4.0.4",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
   },
@@ -20,6 +21,7 @@
     "eslint": "8.16.0",
     "eslint-config-next": "12.1.6",
     "postcss": "^8.4.14",
+    "postcss-import": "^14.1.0",
     "sass": "^1.52.1",
     "tailwindcss": "^3.0.24",
     "typescript": "4.0"
