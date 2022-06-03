@@ -1,6 +1,11 @@
 // import App from 'next/app'
 import '../styles/global.scss'
 
+import "primereact/resources/themes/lara-light-indigo/theme.css";  //theme
+import "primereact/resources/primereact.min.css";                  //core css
+import "primeicons/primeicons.css";                                //icons
+import "primereact/resources/themes/luna-amber/theme.css";                                //icons
+
 function MyApp({ Component, pageProps }) {
     return <Component {...pageProps} />
 }

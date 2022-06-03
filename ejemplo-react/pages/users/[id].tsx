@@ -17,6 +17,7 @@ import {
     DialogTitle,
     useMediaQuery
 } from "@mui/material";
+import {Calendar} from "primereact/calendar";
 
 type Props = {
     item?: User
@@ -32,12 +33,15 @@ const StaticPropsDetail = ({item, errors}: Props) => {
     const theme = useTheme();
     const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
 
+
+    const [date1, setDate1] = useState(null);
+
     useEffect(() => {
         fetch(ENVIRONMENT.host + '/posts/1')
             .then((res) => res.json())
             .then((data) => {
-                console.log('Hello data',data)
-                console.log('queryParams',queryParams)
+                console.log('Hello data', data)
+                console.log('queryParams', queryParams)
             })
     }, [])
     const [open, setOpen] = useState(false);
@@ -70,6 +74,8 @@ const StaticPropsDetail = ({item, errors}: Props) => {
             <p>
                 Hola
             </p>
+
+            <Calendar id="basic" placeholder={'Ingresa tu fecha'} value={date1} onChange={(e) => setDate1(e.value)}/>
 
             <div>
                 <Button variant="outlined" onClick={handleClickOpen}>
