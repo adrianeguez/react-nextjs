@@ -24,6 +24,7 @@ const StaticPropsDetail = ({item, errors}: Props) => {
             .then((res) => res.json())
             .then((data) => {
                 console.log('Hello data',data)
+                console.log('queryParams',queryParams)
             })
     }, [])
 
